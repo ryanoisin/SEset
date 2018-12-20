@@ -40,8 +40,8 @@
 #' # regression weights matrices are read "from column to row"
 #' # path model weights matrix must be transposed for qgraph
 #'
-#' qgraph(t(example), labels=rownames(riskcor), layout=pos,
-#' repulsion=.8, vsize=c(10,15), theme="colorblind", fade=F)
+#' qgraph::qgraph(t(example), labels=rownames(riskcor), layout=pos,
+#' repulsion=.8, vsize=c(10,15), theme="colorblind", fade=FALSE)
 
 precision_to_SEset <- function(omega,orderings=NULL, digits=20){
 

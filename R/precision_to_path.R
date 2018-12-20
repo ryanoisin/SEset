@@ -23,13 +23,13 @@
 #' B <- precision_to_path(omega, digits=2)
 #'
 #' # Path model can be plotted as a weighted DAG
-#' pos <- matrix(c(2,0,-2,-1,-2,1,0,2,0.5,0,0,-2),6,2,byrow=T)
+#' pos <- matrix(c(2,0,-2,-1,-2,1,0,2,0.5,0,0,-2),6,2,byrow=TRUE)
 #'
 #' # qgraph reads matrix elements as "from row to column"
 #' # regression weights matrices are read "from column to row"
 #' # path model weights matrix must be transposed for qgraph
-#' qgraph(t(B), labels=rownames(riskcor), layout=pos,
-#' repulsion=.8, vsize=c(10,15), theme="colorblind", fade=F)
+#' qgraph::qgraph(t(B), labels=rownames(riskcor), layout=pos,
+#' repulsion=.8, vsize=c(10,15), theme="colorblind", fade=FALSE)
 #'
 
 
