@@ -16,7 +16,7 @@ Description: Graphical models for Gaussian variables such as the GGM are
     observed variables, regression weights, and uncorrelated residual terms, and are acyclic.
     As such, the path models in the SE-set are considered as weighted directed acyclic graphs
     (DAGs).
-License: MIT + file LICENSE
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: combinat, memisc, qgraph, glasso, Matrix, Rdpack

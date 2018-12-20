@@ -25,20 +25,17 @@
 #' print(riskcor)
 
 # function to reorder the matrix according to "names"
-reorder2 <- function(matrix,names){
-  if (is.null(dimnames(matrix))){
+reorder2 <- function(matrix,names) {
+  if (is.null(dimnames(matrix))) {
     stop("Error: matrix must have dimension names")
   }
-  if(!all(dimnames(matrix)[[1]] %in% names)){
+  if (!all(rownames(matrix) %in% names)) {
     stop("Error: dimnames(matrix) does not match names")
   }
-
-  if(!require("memisc")) install.packages("memisc")
-  require(memisc, quietly=T)
   # First re-order rows
-  matrix_r <- reorder(matrix,dim = 1,names = names)
+  matrix_r <- memisc:::reorder.array(matrix,dim = 1,names = names)
   # Second re-order columns
-  out <- reorder(matrix_r, dim = 2,names = names)
-  dimnames(out) <- list(names,names)
+  out <- memisc:::reorder.array(matrix_r, dim = 2,names = names)
+  dimnames(out) <- list(names, names)
   out
 }

@@ -56,9 +56,9 @@ data(riskcor)
 omega <- EBICglasso_wi(riskcor,n=69)
 
 # Results can be plotted as a GGM
-parcor <- wi2net(omega)
-pos <- matrix(c(2,0,-2,-1,-2,1,0,2,0.5,0,0,-2),6,2,byrow=T)
-qgraph(parcor, labels=rownames(riskcor), layout=pos,
+parcor <- qgraph::wi2net(omega)
+pos <- matrix(c(2,0,-2,-1,-2,1,0,2,0.5,0,0,-2),6,2,byrow=TRUE)
+qgraph::qgraph(parcor, labels=rownames(riskcor), layout=pos,
 repulsion=.8, vsize=c(10,15), theme="colorblind")
 }
 \references{

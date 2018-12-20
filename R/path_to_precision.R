@@ -19,7 +19,7 @@
 
 path_to_precision <- function(B){
   # first calculate lambda
-  lambda<-solve(diag(nrow(B)) - B)
+  lambda <- solve(diag(nrow(B)) - B)
   # if(nrow(lambda)!=ncol(lambda)) return("Error: Lambda must be a square matrix")
   n <- nrow(lambda)
   psi <- diag(c(1,rep(0,n-1))) # Empty Matrix with one as first diagonal
@@ -30,7 +30,7 @@ path_to_precision <- function(B){
   # calculate sigma
   sigma <- lambda %*% psi %*% t(lambda)
   # calculate omega
-  omega<-chol2inv(chol(sigma))
+  omega <- chol2inv(chol(sigma))
   dimnames(omega) <- dimnames(B)
   omega
 }

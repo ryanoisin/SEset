@@ -54,7 +54,7 @@ precision_to_path <- function(omega,digits=20){
   # Solve for the regression weights matrix, rounded
   # backsolve to an adjacency matrix is quicker than solve with upper tri
   U <- round(diag(nrow(U)) - backsolve(U,x = diag(nrow(U))),digits = digits)
-  if(!is.null(label)){
+  if(!is.null(label)) {
     dimnames(U) <- list(label,label)} # Re-label
   # Matrix is in upper triangular form, transpose to lower
   t(U)

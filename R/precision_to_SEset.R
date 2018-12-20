@@ -34,7 +34,7 @@
 #' example <- matrix(SE[20,],6,6)
 #'
 #' # Example path model can be plotted as a weighted DAG
-#' pos <- matrix(c(2,0,-2,-1,-2,1,0,2,0.5,0,0,-2),6,2,byrow=T)
+#' pos <- matrix(c(2,0,-2,-1,-2,1,0,2,0.5,0,0,-2),6,2,byrow=TRUE)
 #'
 #' # qgraph reads matrix elements as "from row to column"
 #' # regression weights matrices are read "from column to row"
@@ -47,19 +47,20 @@ precision_to_SEset <- function(omega,orderings=NULL, digits=20){
 
   # If variables are unnamed, name them here
 
-  if(is.null(dimnames(omega)[[1]])) {
-    dimnames(omega) <- list(paste0("X",seq(1:nrow(omega))),paste0("X",seq(1:nrow(omega))))
+  if (is.null(dimnames(omega)[[1]])) {
+    dimnames(omega) <- list(paste0("X",seq(1:nrow(omega))),
+                            paste0("X",seq(1:nrow(omega))))
   }
 
 
   # If no orderings supplied, all possible orderings are taken
-  if( is.null(orderings) ) {
+  if (is.null(orderings)) {
     orderings <- order_gen(omega)
   }
   # For each ordering, calculate the adjcacency matrix of the DAG
-  t(apply(orderings,2,function(per){
-    omega_r <- reorder2(omega,names=per)
-    reorder2((precision_to_path(omega_r,digits=digits)),
+  t(apply(orderings,2,function(per) {
+    omega_r <- reorder2(omega,names = per)
+    reorder2((precision_to_path(omega_r,digits = digits)),
              names = rownames(omega))
   }) )
 }

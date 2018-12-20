@@ -29,6 +29,7 @@
 #' @seealso
 #' @export
 #' @importFrom Rdpack reprompt
+#' @import Matrix glasso qgraph
 #' @references
 #' \insertRef{qgraph}{SEset}
 #'
@@ -47,24 +48,15 @@
 #' omega <- EBICglasso_wi(riskcor,n=69)
 #'
 #' # Results can be plotted as a GGM
-#' parcor <- wi2net(omega)
-#' pos <- matrix(c(2,0,-2,-1,-2,1,0,2,0.5,0,0,-2),6,2,byrow=T)
-#' qgraph(parcor, labels=rownames(riskcor), layout=pos,
+#' parcor <- qgraph::wi2net(omega)
+#' pos <- matrix(c(2,0,-2,-1,-2,1,0,2,0.5,0,0,-2),6,2,byrow=TRUE)
+#' qgraph::qgraph(parcor, labels=rownames(riskcor), layout=pos,
 #' repulsion=.8, vsize=c(10,15), theme="colorblind")
 
 EBICglasso_wi <- function (S, n, gamma = 0.5, penalize.diagonal = FALSE, nlambda = 100,
           lambda.min.ratio = 0.01, returnAllResults = FALSE, checkPD = TRUE,
           penalizeMatrix, countDiagonal = FALSE, refit = FALSE, ...)
 {
-  if(!require("Matrix")) install.packages("Matrix")
-  if(!require("glasso")) install.pacakges("glasso")
-  if(!require("qgraph")) install.packages("qgraph")
-
-  require(Matrix)
-  # require(qgraph)
-  require(glasso)
-  require(qgraph)
-
   ## According to huge???
   logGaus <- function(S,K,n)
   {

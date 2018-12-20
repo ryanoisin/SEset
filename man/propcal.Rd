@@ -4,7 +4,7 @@
 \alias{propcal}
 \title{Edge frequency in the SEset}
 \usage{
-propcal(SEmatrix, names = NULL, rm_duplicate = TRUE, directed = T)
+propcal(SEmatrix, names = NULL, rm_duplicate = TRUE, directed = TRUE)
 }
 \arguments{
 \item{SEmatrix}{An \eqn{n \times p} matrix containing the SEset, where each row

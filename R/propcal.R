@@ -23,22 +23,22 @@
 #' @examples
 
 
-propcal <- function(SEmatrix,names=NULL,rm_duplicate = TRUE,directed = T){
-  if(is.null(dim(SEmatrix))){
+propcal <- function(SEmatrix, names=NULL, rm_duplicate = TRUE, directed = TRUE){
+  if (is.null(dim(SEmatrix))) {
     stop("SEset must have more than one element")
   }
 
-  if(rm_duplicate==TRUE){
+  if (rm_duplicate == TRUE) {
     SEmatrix <- unique(SEmatrix,MARGIN = 1)
   }
-  SEmatrix[SEmatrix!=0] <- 1
+  SEmatrix[SEmatrix != 0] <- 1
   n <- sqrt(ncol(SEmatrix))
   # matrix is in Upper-triangular form (transpose of SEM beta matrix)
   prop <- matrix(apply(SEmatrix,2,sum)/dim(SEmatrix)[1],n,n)
-  if(directed==F){
-    prop=prop+t(prop)
+  if (directed == F) {
+    prop = prop + t(prop)
   }
-  if(!is.null(names)){
+  if (!is.null(names)) {
     dimnames(prop) <- list(names,names)
   }
   prop
