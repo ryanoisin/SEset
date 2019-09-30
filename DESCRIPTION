@@ -1,7 +1,7 @@
 Package: SEset
 Type: Package
 Title: Generates a set of statistically-equivalent path models from a precision matrix
-Version: 0.1.0
+Version: 0.2.0
 Author: Oisín Ryan
 Maintainer: Oisín Ryan <ryanoisin@gmail.com>
 Description: Graphical models for Gaussian variables such as the GGM are

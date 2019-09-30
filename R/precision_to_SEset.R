@@ -11,6 +11,7 @@
 #'     orderings are used
 #' @param digits desired rounding of the output weights matrices in the SE-set,
 #'     in decimal places. Defaults to 20.
+#' @param rm_duplicates Logical indicating whether only unique DAGs should be returned
 #' @return a \eqn{p! \times p} matrix containing the SE-set
 #'     (or \eqn{n \times p}  matrix if a custom set of \eqn{n} orderings is specified).
 #'     Each row represents a lower-triangular weights matrix, stacked column-wise.
@@ -43,7 +44,7 @@
 #' qgraph::qgraph(t(example), labels=rownames(riskcor), layout=pos,
 #' repulsion=.8, vsize=c(10,15), theme="colorblind", fade=FALSE)
 
-precision_to_SEset <- function(omega,orderings=NULL, digits=20){
+precision_to_SEset <- function(omega, orderings=NULL, digits=20, rm_duplicates = FALSE){
 
   # If variables are unnamed, name them here
 
@@ -58,10 +59,14 @@ precision_to_SEset <- function(omega,orderings=NULL, digits=20){
     orderings <- order_gen(omega)
   }
   # For each ordering, calculate the adjcacency matrix of the DAG
-  t(apply(orderings,2,function(per) {
+  out <- t(apply(orderings,2,function(per) {
     omega_r <- reorder2(omega,names = per)
     reorder2((precision_to_path(omega_r,digits = digits)),
              names = rownames(omega))
   }) )
+  if (rm_duplicates){
+    out <- unique(out, MARGIN = 1)
+  }
+
 }
 
