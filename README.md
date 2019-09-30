@@ -1,4 +1,5 @@
-## Description
+
+# SEset
 An `R` package implementing the **SE-set algorithm**, a tool to explore statistically-equivalent path models from estimated network structures.
 
 ## Background
