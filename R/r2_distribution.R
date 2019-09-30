@@ -16,7 +16,8 @@
 #' @seealso \code{\link{precision_to_SEset}, \link{find_parents}}
 #' @export
 #' @references
-#' \insertRef{ryan2019}{SEset}
+#'     \insertRef{ryan2019}{SEset}
+#'     \insertRef{haslbeck2018well}{SEset}
 #' @examples
 #' # first estimate the precision matrix
 #' data(riskcor)

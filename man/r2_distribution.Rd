@@ -40,6 +40,7 @@ apply(r2set,2,hist)
 }
 \references{
 \insertRef{ryan2019}{SEset}
+    \insertRef{haslbeck2018well}{SEset}
 }
 \seealso{
 \code{\link{precision_to_SEset}, \link{find_parents}}

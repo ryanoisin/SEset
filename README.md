@@ -3,9 +3,9 @@
 An `R` package implementing the **SE-set algorithm**, a tool to explore statistically-equivalent path models from estimated network structures.
 
 ## Background
-This repository contains an `R` package used by Ryan, Bringmann and Schuurman (2019) to aid researchers in 
+This repository contains an `R` package used by Ryan, Bringmann and Schuurman (2019)[[PsyArXiv]](https://www.psyarxiv.com) to aid researchers in 
 investigating the relationship between a given GGM estimate (in the form of a precision matrix) and possible underlying linear path models 
-(here referred to as weighted DAG structures). Full details on the package can be found in **Appendix B** of the manuscript, and code to reproduce the empirical illustration in that paper can be found in this repository.
+(here referred to as weighted DAG structures). Full details on the package can be found in **Appendix B** of the manuscript, and code to reproduce the empirical illustration in that paper can be found in [this repository](https://github.com/ryanoisin/CausalHypotheses).
 
 ## Installation
 The current version of this package can be installed directly from github using

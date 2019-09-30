@@ -4,7 +4,8 @@
 \alias{precision_to_SEset}
 \title{SE-set from precision matrix}
 \usage{
-precision_to_SEset(omega, orderings = NULL, digits = 20)
+precision_to_SEset(omega, orderings = NULL, digits = 20,
+  rm_duplicates = FALSE)
 }
 \arguments{
 \item{omega}{input \eqn{p \times p} precision matrix}
@@ -16,6 +17,8 @@ orderings are used}
 
 \item{digits}{desired rounding of the output weights matrices in the SE-set,
 in decimal places. Defaults to 20.}
+
+\item{rm_duplicates}{Logical indicating whether only unique DAGs should be returned}
 }
 \value{
 a \eqn{p! \times p} matrix containing the SE-set
