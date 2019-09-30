@@ -67,6 +67,7 @@ precision_to_SEset <- function(omega, orderings=NULL, digits=20, rm_duplicates =
   if (rm_duplicates){
     out <- unique(out, MARGIN = 1)
   }
+  return(out)
 
 }
 
