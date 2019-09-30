@@ -15,7 +15,6 @@
 #'     \insertRef{shojaie2010penalized}{SEset}
 #'
 #'     \insertRef{bollen89sem}{SEset}
-#' @examples
 
 path_to_precision <- function(B){
   # first calculate lambda

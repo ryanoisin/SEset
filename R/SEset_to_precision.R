@@ -19,7 +19,7 @@
 #'     stacked column-wise in \eqn{n} rows.
 #'     If \code{output = "summary"} returns a list containing the bias, MSE and
 #'     RMSE for each re-calculated precision matrix, relative to comparison \code{omega}
-#'     matrix supplied
+#'     matrix supplied.
 #' @seealso \code{\link{precision_to_path}}, \code{\link{path_to_precision}}
 #' @export
 #' @importFrom Rdpack reprompt
@@ -29,19 +29,9 @@
 #'     \insertRef{shojaie2010penalized}{SEset}
 #'
 #'     \insertRef{bollen89sem}{SEset}
-#' @examples
-
 
 SEset_to_precision <-
   function(SEmatrix, order.ref=NULL, order.mat = NULL, output="raw", omega=NULL){
-  # order.ref should be a character vector with variable names, the reference ordering
-  # order.mat should be either NULL, or a nrow(SEmatrix) * nvar matrix of character strings,
-      # defining the ordering of the matrix corresponding to each row of SEmatrix
-      # by default, it is assumed that all orderings are included in SEmatrix
-  # output can be either:
-    # "raw" - returns a matrix of nrow(SEmatrix) containing each re-calculated precision matrix
-    # "performance" - returns a list containing bias, MSE and RMSE for each element of omega
-  # If output="raw", omega must be supplied, the comparison precision matrix
   prec_bias <- function(precmat,omega) {
 
     comp <- omega[lower.tri(omega,diag = TRUE)]

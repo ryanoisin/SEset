@@ -29,7 +29,7 @@ If \code{output = "raw"}, a \eqn{n \times p} matrix of precision matrices
     stacked column-wise in \eqn{n} rows.
     If \code{output = "summary"} returns a list containing the bias, MSE and
     RMSE for each re-calculated precision matrix, relative to comparison \code{omega}
-    matrix supplied
+    matrix supplied.
 }
 \description{
 Takes the SE-set and calculates for each weights matrix the corresponding

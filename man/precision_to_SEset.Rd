@@ -31,7 +31,7 @@ Takes a precision matrix and generates the SE-set, a set of
 \examples{
 # first estimate the precision matrix
 data(riskcor)
-omega <- EBICglasso_wi(riskcor,n=69)
+omega <- (qgraph::EBICglasso(riskcor, n = 69, returnAllResults = TRUE))$optwi
 SE <- precision_to_SEset(omega, digits=3)
 
 # each row of SE defines a path-model weights matrix.

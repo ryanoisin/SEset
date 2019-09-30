@@ -2,7 +2,7 @@
 % Please edit documentation in R/propcal.R
 \name{propcal}
 \alias{propcal}
-\title{Edge frequency in the SEset}
+\title{Edge frequency in the SE-set}
 \usage{
 propcal(SEmatrix, names = NULL, rm_duplicate = TRUE, directed = TRUE)
 }

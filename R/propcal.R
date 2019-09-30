@@ -1,4 +1,4 @@
-#' Edge frequency in the SEset
+#' Edge frequency in the SE-set
 #'
 #' A function used to analyse the SEset results. Calculates the proportion of
 #'     path models in a given SEset in which a particular edge is present
@@ -20,7 +20,6 @@
 #' @export
 #' @references
 #' \insertRef{ryan2019}{SEset}
-#' @examples
 
 
 propcal <- function(SEmatrix, names=NULL, rm_duplicate = TRUE, directed = TRUE){
