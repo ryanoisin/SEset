@@ -10,32 +10,25 @@
 #' @seealso \code{\link{order_gen}}, \code{\link{precision_to_SEset}}
 #' @export
 #' @importFrom Rdpack reprompt
-#' @references
-#' \insertRef{memisc}{SEset}
 #' @examples
 #' data(riskcor)
 #'
 #' # first define an ordered vector of names
-#' names <- rownames(riskcor)
-#' names <- c(names[1],names[2],names[3],names[4],names[6],names[5])
+#' row_names <- rownames(riskcor)
+#' row_names_new <- row_names[c(1,2,3,4,6,5)]
 #'
-#' reorder2(riskcor,names)
+#' reorder(riskcor,row_names_new)
 #'
 #' # The fifth and sixth row and column have been switched
 #' print(riskcor)
 
 # function to reorder the matrix according to "names"
-reorder2 <- function(matrix,names) {
+reorder <- function(matrix, names) {
   if (is.null(dimnames(matrix))) {
     stop("Error: matrix must have dimension names")
   }
   if (!all(rownames(matrix) %in% names)) {
     stop("Error: dimnames(matrix) does not match names")
   }
-  # First re-order rows
-  matrix_r <- memisc:::reorder.array(matrix,dim = 1,names = names)
-  # Second re-order columns
-  out <- memisc:::reorder.array(matrix_r, dim = 2,names = names)
-  dimnames(out) <- list(names, names)
-  out
+  matrix[names,names]
 }

@@ -19,7 +19,11 @@
 #'     \insertRef{bollen89sem}{SEset}
 #' @examples
 #' data(riskcor)
-#' omega <- EBICglasso_wi(riskcor,n=69)
+#' omega <- (qgraph::EBICglasso(riskcor, n = 69, returnAllResults = TRUE))$optwi
+#' # qgraph method estimates a non-symmetric omega matrix, but uses forceSymmetric to create
+#' # a symmetric matrix (see qgraph:::EBICglassoCore line 65)
+#' omega <- as.matrix(Matrix::forceSymmetric(omega)) # returns the precision matrix
+#'
 #' B <- precision_to_path(omega, digits=2)
 #'
 #' # Path model can be plotted as a weighted DAG
@@ -34,13 +38,16 @@
 
 
 precision_to_path <- function(omega,digits=20){
-  # omega is the input precision matrix
-  #       digits <- number of decimal places for rounding
-  # returns an upper triangular matrix of regression coefficients
-  # weighted adjacency matrix of a linear SEM model
 
   # Save variable names
   label <- rownames(omega)
+
+  # check that matrix is symmetric
+  if(!Matrix::isSymmetric(omega)){
+    omega <- as.matrix(Matrix::forceSymmetric(omega))
+    warning("Input matrix is not symmetric - Matrix::forceSymmetric() used to correct")
+    dimnames(omega) <- list(label,label)
+  }
 
   # Take the inverse to produce a "model-implied" variance-covariance matrix
   sigma <- chol2inv(chol(omega))

@@ -21,7 +21,11 @@ Takes a precision matrix and generates a lower-triangular weights matrix.
 }
 \examples{
 data(riskcor)
-omega <- EBICglasso_wi(riskcor,n=69)
+omega <- (qgraph::EBICglasso(riskcor, n = 69, returnAllResults = TRUE))$optwi
+# qgraph method estimates a non-symmetric omega matrix, but uses forceSymmetric to create
+# a symmetric matrix (see qgraph:::EBICglassoCore line 65)
+omega <- as.matrix(Matrix::forceSymmetric(omega)) # returns the precision matrix
+
 B <- precision_to_path(omega, digits=2)
 
 # Path model can be plotted as a weighted DAG

@@ -35,6 +35,10 @@ Takes a precision matrix and generates the SE-set, a set of
 # first estimate the precision matrix
 data(riskcor)
 omega <- (qgraph::EBICglasso(riskcor, n = 69, returnAllResults = TRUE))$optwi
+# qgraph method estimates a non-symmetric omega matrix, but uses forceSymmetric to create
+# a symmetric matrix (see qgraph:::EBICglassoCore line 65)
+omega <- as.matrix(Matrix::forceSymmetric(omega)) # returns the precision matrix
+
 SE <- precision_to_SEset(omega, digits=3)
 
 # each row of SE defines a path-model weights matrix.
@@ -59,5 +63,5 @@ repulsion=.8, vsize=c(10,15), theme="colorblind", fade=FALSE)
     \insertRef{bollen89sem}{SEset}
 }
 \seealso{
-\code{\link{precision_to_path}}, \code{\link{reorder2}}, \code{\link{order_gen}}
+\code{\link{precision_to_path}}, \code{\link{reorder}}, \code{\link{order_gen}}
 }

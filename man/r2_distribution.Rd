@@ -30,6 +30,10 @@ predicted by all of its parent nodes
 # first estimate the precision matrix
 data(riskcor)
 omega <- (qgraph::EBICglasso(riskcor, n = 69, returnAllResults = TRUE))$optwi
+# qgraph method estimates a non-symmetric omega matrix, but uses forceSymmetric to create
+# a symmetric matrix (see qgraph:::EBICglassoCore line 65)
+omega <- as.matrix(Matrix::forceSymmetric(omega)) # returns the precision matrix
+
 SEmatrix <- precision_to_SEset(omega, digits=3)
 
 r2set  <- r2_distribution(SEmatrix, cormat = riskcor, names = NULL, indices = c(1,3,4,5,6))

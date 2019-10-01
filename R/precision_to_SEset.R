@@ -15,7 +15,7 @@
 #' @return a \eqn{p! \times p} matrix containing the SE-set
 #'     (or \eqn{n \times p}  matrix if a custom set of \eqn{n} orderings is specified).
 #'     Each row represents a lower-triangular weights matrix, stacked column-wise.
-#' @seealso \code{\link{precision_to_path}}, \code{\link{reorder2}}, \code{\link{order_gen}}
+#' @seealso \code{\link{precision_to_path}}, \code{\link{reorder}}, \code{\link{order_gen}}
 #' @export
 #' @importFrom Rdpack reprompt
 #' @references
@@ -28,6 +28,10 @@
 #' # first estimate the precision matrix
 #' data(riskcor)
 #' omega <- (qgraph::EBICglasso(riskcor, n = 69, returnAllResults = TRUE))$optwi
+#' # qgraph method estimates a non-symmetric omega matrix, but uses forceSymmetric to create
+#' # a symmetric matrix (see qgraph:::EBICglassoCore line 65)
+#' omega <- as.matrix(Matrix::forceSymmetric(omega)) # returns the precision matrix
+#'
 #' SE <- precision_to_SEset(omega, digits=3)
 #'
 #' # each row of SE defines a path-model weights matrix.
@@ -46,6 +50,14 @@
 
 precision_to_SEset <- function(omega, orderings=NULL, digits=20, rm_duplicates = FALSE){
 
+  # check that matrix is symmetric
+  if(!Matrix::isSymmetric(omega)){
+    label <- dimnames(omega)
+    omega <- as.matrix(Matrix::forceSymmetric(omega))
+    warning("Input matrix is not symmetric - Matrix::forceSymmetric() used to correct")
+    dimnames(omega) <- label
+  }
+
   # If variables are unnamed, name them here
 
   if (is.null(dimnames(omega)[[1]])) {
@@ -53,15 +65,14 @@ precision_to_SEset <- function(omega, orderings=NULL, digits=20, rm_duplicates =
                             paste0("X",seq(1:nrow(omega))))
   }
 
-
   # If no orderings supplied, all possible orderings are taken
   if (is.null(orderings)) {
     orderings <- order_gen(omega)
   }
   # For each ordering, calculate the adjcacency matrix of the DAG
   out <- t(apply(orderings,2,function(per) {
-    omega_r <- reorder2(omega,names = per)
-    reorder2((precision_to_path(omega_r,digits = digits)),
+    omega_r <- reorder(omega,names = per)
+    reorder((precision_to_path(omega_r,digits = digits)),
              names = rownames(omega))
   }) )
   if (rm_duplicates){
