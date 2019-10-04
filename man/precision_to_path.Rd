@@ -4,13 +4,20 @@
 \alias{precision_to_path}
 \title{Path model from ordered precision matrix}
 \usage{
-precision_to_path(omega, digits = 20)
+precision_to_path(omega, input_type = "precision", digits = 20,
+  quietly = TRUE)
 }
 \arguments{
-\item{omega}{input precision matrix, with rows and columns in desired topological ordering
-must be an invertible square matrix}
+\item{omega}{input matrix, with rows and columns in desired topological ordering
+Must be an invertible square matrix}
+
+\item{input_type}{specifies what type of matrix `omega` is.
+ default is "precision", other options include a matrix of partial correlations
+("parcor") or a model implied covariance or correlation matrix "MIcov"}
 
 \item{digits}{desired rounding of the output matrix}
+
+\item{quietly}{logical, show warning messages or not}
 }
 \value{
 lower triangular matrix containing regression weights of the path model.

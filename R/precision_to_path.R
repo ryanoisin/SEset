@@ -2,10 +2,13 @@
 #'
 #' Takes a precision matrix and generates a lower-triangular weights matrix.
 #'
-#' @param omega input precision matrix, with rows and columns in desired topological ordering
-#'     must be an invertible square matrix
+#' @param omega input matrix, with rows and columns in desired topological ordering
+#'     Must be an invertible square matrix
 #' @param digits desired rounding of the output matrix
-
+#' @param input_type specifies what type of matrix `omega` is.
+#'     default is "precision", other options include a matrix of partial correlations
+#'    ("parcor") or a model implied covariance or correlation matrix "MIcov"
+#' @param quietly logical, show warning messages or not
 #' @return lower triangular matrix containing regression weights of the path model.
 #'   Element ij represents the effect of \eqn{X_j} on \eqn{X_i}
 #' @seealso \code{\link{precision_to_SEset}}
@@ -37,7 +40,7 @@
 #'
 
 
-precision_to_path <- function(omega,digits=20){
+precision_to_path <- function(omega, input_type = "precision", digits=20, quietly = TRUE){
 
   # Save variable names
   label <- rownames(omega)
@@ -45,13 +48,28 @@ precision_to_path <- function(omega,digits=20){
   # check that matrix is symmetric
   if(!Matrix::isSymmetric(omega)){
     omega <- as.matrix(Matrix::forceSymmetric(omega))
-    warning("Input matrix is not symmetric - Matrix::forceSymmetric() used to correct")
+    if(!quietly){
+    warning("Input matrix is not symmetric - Matrix::forceSymmetric() used to correct") }
     dimnames(omega) <- list(label,label)
   }
 
   # Take the inverse to produce a "model-implied" variance-covariance matrix
+  if(input_type == "precision"){
   sigma <- chol2inv(chol(omega))
   diag(sigma) <- rep(1,dim(sigma)[1]) # set diagonal to exactly 1
+  }
+  if(input_type == "parcor"){
+    if(!quietly){
+    warning("model-implied matrix approximated, if possible supply precision matrix as input. \n
+    Model-implied correlation matrix may differ from approx 7th decimal place")
+    }
+    diag(omega) <- 1
+    sigma <- corpcor::pcor2cor(omega)
+  }
+  if(input_type == "MIcov"){
+    # sigma <- cov2cor(omega)
+    sigma <- omega
+  }
 
   # Solve for the LDL^T decomposition using the cholesky factor (GG^T)
   G <- chol(sigma)

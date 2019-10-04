@@ -75,8 +75,8 @@ SEset_to_precision <-
   for (i in 1:nrow(order.mat)) {
     Ab <- t(matrix(SEmatrix[i,],nv,nv))
     dimnames(Ab) <- list(order.ref,order.ref)
-    Ab <- reorder(Ab,names = order.mat[i,]) # matrix now topologically ordered
-    omegaest <- reorder(path_to_precision(Ab),order.ref)
+    Ab <- reorder_mat(Ab,names = order.mat[i,]) # matrix now topologically ordered
+    omegaest <- reorder_mat(path_to_precision(Ab),order.ref)
     precmat[i,] <- omegaest[lower.tri(omegaest,diag = TRUE)]
   }
   if (output == "raw") {

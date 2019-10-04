@@ -17,13 +17,13 @@
 #' row_names <- rownames(riskcor)
 #' row_names_new <- row_names[c(1,2,3,4,6,5)]
 #'
-#' reorder(riskcor,row_names_new)
+#' reorder_mat(riskcor,row_names_new)
 #'
 #' # The fifth and sixth row and column have been switched
 #' print(riskcor)
 
 # function to reorder the matrix according to "names"
-reorder <- function(matrix, names) {
+reorder_mat <- function(matrix, names) {
   if (is.null(dimnames(matrix))) {
     stop("Error: matrix must have dimension names")
   }

@@ -12,10 +12,13 @@
 #' @param digits desired rounding of the output weights matrices in the SE-set,
 #'     in decimal places. Defaults to 20.
 #' @param rm_duplicates Logical indicating whether only unique DAGs should be returned
+#' @param input_type specifies what type of matrix `omega` is.
+#'     default is "precision", other options include a matrix of partial correlations
+#'    ("parcor") or a model implied covariance or correlation matrix "MIcov"
 #' @return a \eqn{p! \times p} matrix containing the SE-set
 #'     (or \eqn{n \times p}  matrix if a custom set of \eqn{n} orderings is specified).
 #'     Each row represents a lower-triangular weights matrix, stacked column-wise.
-#' @seealso \code{\link{precision_to_path}}, \code{\link{reorder}}, \code{\link{order_gen}}
+#' @seealso \code{\link{precision_to_path}}, \code{\link{reorder_mat}}, \code{\link{order_gen}}
 #' @export
 #' @importFrom Rdpack reprompt
 #' @references
@@ -48,7 +51,8 @@
 #' qgraph::qgraph(t(example), labels=rownames(riskcor), layout=pos,
 #' repulsion=.8, vsize=c(10,15), theme="colorblind", fade=FALSE)
 
-precision_to_SEset <- function(omega, orderings=NULL, digits=20, rm_duplicates = FALSE){
+precision_to_SEset <- function(omega, orderings=NULL, digits=20, rm_duplicates = FALSE,
+                               input_type = "precision"){
 
   # check that matrix is symmetric
   if(!Matrix::isSymmetric(omega)){
@@ -65,14 +69,18 @@ precision_to_SEset <- function(omega, orderings=NULL, digits=20, rm_duplicates =
                             paste0("X",seq(1:nrow(omega))))
   }
 
+  if(input_type == "parcor"){
+      warning("model-implied matrix approximated, if possible supply precision matrix as input. \n
+      Model-implied correlation matrix may differ from approx 7th decimal place")
+  }
   # If no orderings supplied, all possible orderings are taken
   if (is.null(orderings)) {
     orderings <- order_gen(omega)
   }
   # For each ordering, calculate the adjcacency matrix of the DAG
   out <- t(apply(orderings,2,function(per) {
-    omega_r <- reorder(omega,names = per)
-    reorder((precision_to_path(omega_r,digits = digits)),
+    omega_r <- reorder_mat(omega,names = per)
+    reorder_mat((precision_to_path(omega_r, input_type = input_type, digits = digits, quietly = TRUE)),
              names = rownames(omega))
   }) )
   if (rm_duplicates){

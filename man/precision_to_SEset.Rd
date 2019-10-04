@@ -5,7 +5,7 @@
 \title{SE-set from precision matrix}
 \usage{
 precision_to_SEset(omega, orderings = NULL, digits = 20,
-  rm_duplicates = FALSE)
+  rm_duplicates = FALSE, input_type = "precision")
 }
 \arguments{
 \item{omega}{input \eqn{p \times p} precision matrix}
@@ -19,6 +19,10 @@ orderings are used}
 in decimal places. Defaults to 20.}
 
 \item{rm_duplicates}{Logical indicating whether only unique DAGs should be returned}
+
+\item{input_type}{specifies what type of matrix `omega` is.
+ default is "precision", other options include a matrix of partial correlations
+("parcor") or a model implied covariance or correlation matrix "MIcov"}
 }
 \value{
 a \eqn{p! \times p} matrix containing the SE-set
@@ -63,5 +67,5 @@ repulsion=.8, vsize=c(10,15), theme="colorblind", fade=FALSE)
     \insertRef{bollen89sem}{SEset}
 }
 \seealso{
-\code{\link{precision_to_path}}, \code{\link{reorder}}, \code{\link{order_gen}}
+\code{\link{precision_to_path}}, \code{\link{reorder_mat}}, \code{\link{order_gen}}
 }
