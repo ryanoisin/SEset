@@ -65,7 +65,7 @@ precision_to_path <- function(omega, input_type = "precision", digits=20, quietl
     warning("If possible supply precision matrix as input")
     }
     omega <- -omega
-    diag(omega) <- -diag(omega)
+    diag(omega) <- 1
     sigma <- stats::cov2cor(solve(omega))
   }
 
