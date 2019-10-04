@@ -70,8 +70,6 @@ precision_to_SEset <- function(omega, orderings=NULL, digits=20, rm_duplicates =
   }
 
   if(input_type == "parcor"){
-      warning("model-implied matrix approximated, if possible supply precision matrix as input. \n
-      Model-implied correlation matrix may differ from approx 7th decimal place")
   }
   # If no orderings supplied, all possible orderings are taken
   if (is.null(orderings)) {

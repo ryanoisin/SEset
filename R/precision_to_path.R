@@ -12,6 +12,7 @@
 #' @return lower triangular matrix containing regression weights of the path model.
 #'   Element ij represents the effect of \eqn{X_j} on \eqn{X_i}
 #' @seealso \code{\link{precision_to_SEset}}
+#' @import stats
 #' @export
 #' @importFrom Rdpack reprompt
 #' @references
@@ -58,17 +59,19 @@ precision_to_path <- function(omega, input_type = "precision", digits=20, quietl
   sigma <- chol2inv(chol(omega))
   diag(sigma) <- rep(1,dim(sigma)[1]) # set diagonal to exactly 1
   }
+  # Else, transform the matrix of partial correlations
   if(input_type == "parcor"){
     if(!quietly){
-    warning("model-implied matrix approximated, if possible supply precision matrix as input. \n
-    Model-implied correlation matrix may differ from approx 7th decimal place")
+    warning("If possible supply precision matrix as input")
     }
-    diag(omega) <- 1
-    sigma <- corpcor::pcor2cor(omega)
+    omega <- -omega
+    diag(omega) <- -diag(omega)
+    sigma <- stats::cov2cor(solve(omega))
   }
+
+  # Else, ensure that the supplied model implied covariance matrix is standardized
   if(input_type == "MIcov"){
-    # sigma <- cov2cor(omega)
-    sigma <- omega
+     sigma <- cov2cor(omega)
   }
 
   # Solve for the LDL^T decomposition using the cholesky factor (GG^T)
