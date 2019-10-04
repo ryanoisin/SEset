@@ -108,4 +108,4 @@ p + theme(text = element_text(size = 20),
 
 ## Contact Details
 
-For more details please contact the first author at **o.ryan@uu.nl**
+For more details please contact **o.ryan@uu.nl**
