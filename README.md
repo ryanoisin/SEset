@@ -7,6 +7,8 @@ This repository contains an `R` package used by Ryan, Bringmann and Schuurman (p
 investigating the relationship between a given GGM estimate (in the form of a precision matrix) and possible underlying linear path models 
 (here referred to as weighted DAG structures). Full details on the package can be found in **Appendix B** of the manuscript, and code to reproduce the empirical illustration in that paper can be found in [this repository](https://github.com/ryanoisin/CausalHypotheses).
 
+Please note that we recommend the use of this tool only for GGMs with **13 or less nodes** as the size of the outputted object, and the run-time, grows factorially ($p!$) with each node in the network.
+
 ## Installation
 The current version of this package can be installed directly from github using
 ```r
