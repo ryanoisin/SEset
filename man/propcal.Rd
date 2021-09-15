@@ -34,5 +34,5 @@ A function used to analyse the SEset results. Calculates the proportion of
 \insertRef{ryan2019}{SEset}
 }
 \seealso{
-\code{\link{precision_to_SEset}}
+\code{\link{network_to_SEset}}
 }

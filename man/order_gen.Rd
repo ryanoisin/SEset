@@ -29,5 +29,5 @@ print(orderings[,2])
 \insertRef{combinat}{SEset}
 }
 \seealso{
-\code{\link{reorder_mat}}, \code{\link{precision_to_SEset}}
+\code{\link{reorder_mat}}, \code{\link{network_to_SEset}}
 }

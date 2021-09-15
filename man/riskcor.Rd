@@ -4,7 +4,9 @@
 \name{riskcor}
 \alias{riskcor}
 \title{Cognitive risk sample correlation matrix}
-\format{A 6 by 6 correlation matrix}
+\format{
+A 6 by 6 correlation matrix
+}
 \source{
 <https://ars.els-cdn.com/content/image/1-s2.0-S0165032715313252-mmc1.pdf>
 }

@@ -13,7 +13,7 @@
 #' @return Returns an \eqn{n \times p} matrix of \eqn{R^2} values.
 #'  For each member of the SE-set, this represents the variance explained in node \eqn{X_i} by it's parents
 #'  in that weighted DAG.
-#' @seealso \code{\link{precision_to_SEset}, \link{find_parents}}
+#' @seealso \code{\link{network_to_SEset}, \link{find_parents}}
 #' @export
 #' @references
 #'     \insertRef{ryan2019}{SEset}
@@ -26,7 +26,7 @@
 #' # a symmetric matrix (see qgraph:::EBICglassoCore line 65)
 #' omega <- as.matrix(Matrix::forceSymmetric(omega)) # returns the precision matrix
 #'
-#' SEmatrix <- precision_to_SEset(omega, digits=3)
+#' SEmatrix <- network_to_SEset(omega, digits=3)
 #'
 #' r2set  <- r2_distribution(SEmatrix, cormat = riskcor, names = NULL, indices = c(1,3,4,5,6))
 #' # Plot results

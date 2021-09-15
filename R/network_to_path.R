@@ -7,11 +7,10 @@
 #' @param digits desired rounding of the output matrix
 #' @param input_type specifies what type of matrix `omega` is.
 #'     default is "precision", other options include a matrix of partial correlations
-#'    ("parcor") or a model implied covariance or correlation matrix "MIcov"
-#' @param quietly logical, show warning messages or not
+#'    ("parcor") or a covariance matrix "covariance"
 #' @return lower triangular matrix containing regression weights of the path model.
 #'   Element ij represents the effect of \eqn{X_j} on \eqn{X_i}
-#' @seealso \code{\link{precision_to_SEset}}
+#' @seealso \code{\link{network_to_SEset}}
 #' @import stats
 #' @export
 #' @importFrom Rdpack reprompt
@@ -28,7 +27,7 @@
 #' # a symmetric matrix (see qgraph:::EBICglassoCore line 65)
 #' omega <- as.matrix(Matrix::forceSymmetric(omega)) # returns the precision matrix
 #'
-#' B <- precision_to_path(omega, digits=2)
+#' B <- network_to_path(omega, digits=2)
 #'
 #' # Path model can be plotted as a weighted DAG
 #' pos <- matrix(c(2,0,-2,-1,-2,1,0,2,0.5,0,0,-2),6,2,byrow=TRUE)
@@ -41,7 +40,7 @@
 #'
 
 
-precision_to_path <- function(omega, input_type = "precision", digits=20, quietly = TRUE){
+network_to_path <- function(omega, input_type = "precision", digits=20){
 
   # Save variable names
   label <- rownames(omega)
@@ -49,8 +48,6 @@ precision_to_path <- function(omega, input_type = "precision", digits=20, quietl
   # check that matrix is symmetric
   if(!Matrix::isSymmetric(omega)){
     omega <- as.matrix(Matrix::forceSymmetric(omega))
-    if(!quietly){
-    warning("Input matrix is not symmetric - Matrix::forceSymmetric() used to correct") }
     dimnames(omega) <- list(label,label)
   }
 
@@ -61,17 +58,14 @@ precision_to_path <- function(omega, input_type = "precision", digits=20, quietl
   }
   # Else, transform the matrix of partial correlations
   if(input_type == "parcor"){
-    if(!quietly){
-    warning("If possible supply precision matrix as input")
-    }
     omega <- -omega
     diag(omega) <- 1
     sigma <- stats::cov2cor(solve(omega))
   }
 
-  # Else, ensure that the supplied model implied covariance matrix is standardized
-  if(input_type == "MIcov"){
-     sigma <- cov2cor(omega)
+  # If a covariance matrix is specified, don't do anything
+  if(input_type == "covariance"){
+     sigma <- sigma
   }
 
   # Solve for the LDL^T decomposition using the cholesky factor (GG^T)
