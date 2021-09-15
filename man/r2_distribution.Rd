@@ -34,7 +34,7 @@ omega <- (qgraph::EBICglasso(riskcor, n = 69, returnAllResults = TRUE))$optwi
 # a symmetric matrix (see qgraph:::EBICglassoCore line 65)
 omega <- as.matrix(Matrix::forceSymmetric(omega)) # returns the precision matrix
 
-SEmatrix <- precision_to_SEset(omega, digits=3)
+SEmatrix <- network_to_SEset(omega, digits=3)
 
 r2set  <- r2_distribution(SEmatrix, cormat = riskcor, names = NULL, indices = c(1,3,4,5,6))
 # Plot results
@@ -47,5 +47,5 @@ apply(r2set,2,hist)
     \insertRef{haslbeck2018well}{SEset}
 }
 \seealso{
-\code{\link{precision_to_SEset}, \link{find_parents}}
+\code{\link{network_to_SEset}, \link{find_parents}}
 }

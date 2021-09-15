@@ -18,7 +18,7 @@
 #' @return a \eqn{p! \times p} matrix containing the SE-set
 #'     (or \eqn{n \times p}  matrix if a custom set of \eqn{n} orderings is specified).
 #'     Each row represents a lower-triangular weights matrix, stacked column-wise.
-#' @seealso \code{\link{precision_to_path}}, \code{\link{reorder_mat}}, \code{\link{order_gen}}
+#' @seealso \code{\link{network_to_path}}, \code{\link{reorder_mat}}, \code{\link{order_gen}}
 #' @export
 #' @importFrom Rdpack reprompt
 #' @references
@@ -35,7 +35,7 @@
 #' # a symmetric matrix (see qgraph:::EBICglassoCore line 65)
 #' omega <- as.matrix(Matrix::forceSymmetric(omega)) # returns the precision matrix
 #'
-#' SE <- precision_to_SEset(omega, digits=3)
+#' SE <- network_to_SEset(omega, digits=3)
 #'
 #' # each row of SE defines a path-model weights matrix.
 #' # We can extract element 20 by writing it to a matrix
@@ -51,7 +51,7 @@
 #' qgraph::qgraph(t(example), labels=rownames(riskcor), layout=pos,
 #' repulsion=.8, vsize=c(10,15), theme="colorblind", fade=FALSE)
 
-precision_to_SEset <- function(omega, orderings=NULL, digits=20, rm_duplicates = FALSE,
+network_to_SEset <- function(omega, orderings=NULL, digits=20, rm_duplicates = FALSE,
                                input_type = "precision"){
 
   # check that matrix is symmetric
@@ -78,7 +78,7 @@ precision_to_SEset <- function(omega, orderings=NULL, digits=20, rm_duplicates =
   # For each ordering, calculate the adjcacency matrix of the DAG
   out <- t(apply(orderings,2,function(per) {
     omega_r <- reorder_mat(omega,names = per)
-    reorder_mat((precision_to_path(omega_r, input_type = input_type, digits = digits, quietly = TRUE)),
+    reorder_mat((network_to_path(omega_r, input_type = input_type, digits = digits)),
              names = rownames(omega))
   }) )
   if (rm_duplicates){

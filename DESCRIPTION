@@ -1,7 +1,7 @@
 Package: SEset
 Type: Package
 Title: Generates a set of statistically-equivalent path models from a precision matrix
-Version: 0.2.2
+Version: 1.0.0
 Author: Oisín Ryan
 Maintainer: Oisín Ryan <ryanoisin@gmail.com>
 Description: Graphical models for Gaussian variables such as the GGM are
@@ -21,6 +21,6 @@ Encoding: UTF-8
 LazyData: true
 Imports: combinat, Matrix, Rdpack, stats
 RdMacros: Rdpack
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Suggests: 
     qgraph

@@ -1,11 +1,11 @@
 #' Precision matrices from the SEset
 #'
 #' Takes the SE-set and calculates for each weights matrix the corresponding
-#'     precision matrix. Used to check the results of \code{\link{precision_to_SEset}}
+#'     precision matrix. Used to check the results of \code{\link{network_to_SEset}}
 #'     to assess deviations from statistical equivalence induced due to rounding,
 #'     thresholding, and numerical approximations.
 #' @param SEmatrix a \eqn{n \times p} matrix containing the SE-set. The output of
-#'     \code{\link{precision_to_SEset}}
+#'     \code{\link{network_to_SEset}}
 #' @param order.ref an optional character vector with variable names, the reference ordering
 #'     of the precision matrix.
 #' @param order.mat a \eqn{n \times p} matrix of character strings,
@@ -14,13 +14,13 @@
 #'     \code{\link{order_gen}}
 #' @param output Output as \code{"raw"} or \code{"summary"}. See value below
 #' @param omega Comparision precision matrix, e.g. original input precision matrix to
-#'     \code{\link{precision_to_SEset}}. Only necessary if \code{output = "summary"}
+#'     \code{\link{network_to_SEset}}. Only necessary if \code{output = "summary"}
 #' @return If \code{output = "raw"}, a \eqn{n \times p} matrix of precision matrices
 #'     stacked column-wise in \eqn{n} rows.
 #'     If \code{output = "summary"} returns a list containing the bias, MSE and
 #'     RMSE for each re-calculated precision matrix, relative to comparison \code{omega}
 #'     matrix supplied.
-#' @seealso \code{\link{precision_to_path}}, \code{\link{path_to_precision}}
+#' @seealso \code{\link{network_to_path}}, \code{\link{path_to_network}}
 #' @export
 #' @importFrom Rdpack reprompt
 #' @references
@@ -30,7 +30,7 @@
 #'
 #'     \insertRef{bollen89sem}{SEset}
 
-SEset_to_precision <-
+SEset_to_network <-
   function(SEmatrix, order.ref=NULL, order.mat = NULL, output="raw", omega=NULL){
   prec_bias <- function(precmat,omega) {
 
@@ -76,7 +76,7 @@ SEset_to_precision <-
     Ab <- t(matrix(SEmatrix[i,],nv,nv))
     dimnames(Ab) <- list(order.ref,order.ref)
     Ab <- reorder_mat(Ab,names = order.mat[i,]) # matrix now topologically ordered
-    omegaest <- reorder_mat(path_to_precision(Ab),order.ref)
+    omegaest <- reorder_mat(path_to_network(Ab),order.ref)
     precmat[i,] <- omegaest[lower.tri(omegaest,diag = TRUE)]
   }
   if (output == "raw") {

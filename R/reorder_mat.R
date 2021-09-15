@@ -7,7 +7,7 @@
 #'     in the desired ordering
 
 #' @return input matrix with rows and columns sorted according to names
-#' @seealso \code{\link{order_gen}}, \code{\link{precision_to_SEset}}
+#' @seealso \code{\link{order_gen}}, \code{\link{network_to_SEset}}
 #' @export
 #' @importFrom Rdpack reprompt
 #' @examples

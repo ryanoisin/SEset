@@ -5,7 +5,7 @@
 #' @param omega input p-dimensional square matrix
 #' @return a \eqn{p \times p!} matrix of dimension orderings. Each column
 #'     represents an ordering of dimension names as character strings.
-#' @seealso \code{\link{reorder_mat}}, \code{\link{precision_to_SEset}}
+#' @seealso \code{\link{reorder_mat}}, \code{\link{network_to_SEset}}
 #' @import combinat
 #' @export
 #' @importFrom Rdpack reprompt

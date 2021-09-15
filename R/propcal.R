@@ -16,7 +16,7 @@
 #'    If directed=TRUE, elements ij denote the proportion of weights matrices containing a path
 #'    from \eqn{X_j} to \eqn{X_i}. If directed=F, the output will be a symmetric matrix, with element ij
 #'    denoting in what proprtion an edge of either direction connects \eqn{X_i} to \eqn{X_j}.
-#' @seealso \code{\link{precision_to_SEset}}
+#' @seealso \code{\link{network_to_SEset}}
 #' @export
 #' @references
 #' \insertRef{ryan2019}{SEset}

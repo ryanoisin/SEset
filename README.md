@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 
 # SEset
 An `R` package implementing the **SE-set algorithm**, a tool to explore statistically-equivalent path models from estimated network structures.
@@ -33,10 +38,10 @@ pnet <- qgraph(parcor, repulsion = .8,vsize = c(10,15), theme = "colorblind", fa
 
 Given a $p$-variate precision matrix, the `SEset` pacakge can be used to obtain a set of maximally $p!$ statistically equivalent weighted DAGs (i.e., linear path models): One DAG for every possible topological ordering of the $p$ variables, from exogenous to endogenous. This is the SE-set of `omega` which gives the package its name.
 
-The statistically-equivalent set is found by using the `precision_to_SEset` function
+The statistically-equivalent set is found by using the `network_to_SEset` function
 
 ```r
-SE_example <- precision_to_SEset(omega, digits = 2, rm_duplicates = TRUE)
+SE_example <- network_to_SEset(omega, digits = 2, rm_duplicates = TRUE)
 
 ```
 where the `digits` arguments determines the rounding of paramters in the weighted DAGs, and the `rm_duplicates` argument indicates that only unique weighted DAGs should be returned: duplicates are removed after rounding. Typically, when duplicates are removed, the number of unique DAGs returned is much less than $p!$.
@@ -46,10 +51,10 @@ Alternatively, we can supply a matrix of *partial correlations*, such as output 
 
 ```r
 # Using the partial correlation matrix as input
-SE_example_2 <- precision_to_SEset(parcor, digits = 2, rm_duplicates = TRUE, input_type = "parcor")
+SE_example_2 <- network_to_SEset(parcor, digits = 2, rm_duplicates = TRUE, input_type = "parcor")
 # Calculating the model-implied covariance matrix from the precision matrix
 MIcov <- solve(omega)
-SE_example_3 <- precision_to_SEset(MIcov, digits = 2, rm_duplicates = TRUE, input_type = "MIcov")
+SE_example_3 <- network_to_SEset(MIcov, digits = 2, rm_duplicates = TRUE, input_type = "MIcov")
 
 ```
 Note only that, since the partial correlation matrix does not contain information on the diagonal elements of the precision matrix (that is, the partial variances), if a partial correlation matrix is supplied, we transform this to a correlation matrix using the `corpcor` package. As such, small numerical differences (approximately in the 7th decimal place) may be present depending on the input used. 

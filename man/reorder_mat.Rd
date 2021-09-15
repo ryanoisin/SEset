@@ -31,5 +31,5 @@ reorder_mat(riskcor,row_names_new)
 print(riskcor)
 }
 \seealso{
-\code{\link{order_gen}}, \code{\link{precision_to_SEset}}
+\code{\link{order_gen}}, \code{\link{network_to_SEset}}
 }
