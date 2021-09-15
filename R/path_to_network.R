@@ -32,8 +32,9 @@ path_to_network <- function(B, psi = NULL, output = "precision"){
    }
   }
   # calculate sigma
-  if(output == "covariance"){
+
   sigma <- lambda %*% psi %*% t(lambda)
+  if(output == "covariance"){
   return(sigma)
   }else if(output == "precision"){
   # calculate omega
