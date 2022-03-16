@@ -10,7 +10,7 @@ An `R` package implementing the **SE-set algorithm**, a tool to explore statisti
 This repository contains an `R` package used by Ryan, Bringmann and Schuurman (pre-print)[[PsyArXiv]](https://psyarxiv.com/ryg69/) to aid researchers in 
 investigating the relationship between a given GGM estimate (in the form of a precision matrix) and possible underlying linear path models. Linear path models can also be interpreted as "weighted DAGs". Full details on the package can be found in **Appendix B** of the manuscript, and code to reproduce the empirical illustration in that paper can be found in [this repository](https://github.com/ryanoisin/CausalHypotheses).
 
-Please note that we recommend the use of this tool only for GGMs with **13 or less nodes** as the size of the outputted object, and the run-time, grows factorially ($p!$) with each node in the network.
+Please note that we recommend the use of this tool only for GGMs with **13 or less nodes** as the size of the outputted object, and the run-time, grows factorialy ($p!$) with each node in the network.
 
 ## Installation
 The current version of this package can be installed directly from github using
