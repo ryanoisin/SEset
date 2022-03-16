@@ -2,8 +2,7 @@ Package: SEset
 Type: Package
 Title: Computing statistically-equivalent path models
 Version: 1.0.1
-Author: c(
-  person("Oisín", "Ryan", email = "o.ryan@uu.nl",role = c("aut", "cre")))
+Author: Oisín Ryan
 Maintainer: Oisín Ryan <o.ryan@uu.nl>
 Description: Computes the set of statistically-equivalent 
              (Gaussian, linear) path models which generate the input precision or correlation matrix. 
