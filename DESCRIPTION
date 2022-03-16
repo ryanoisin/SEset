@@ -1,21 +1,13 @@
 Package: SEset
 Type: Package
-Title: Generates a set of statistically-equivalent path models from a precision matrix
-Version: 1.0.0
-Author: Oisín Ryan
-Maintainer: Oisín Ryan <ryanoisin@gmail.com>
-Description: Graphical models for Gaussian variables such as the GGM are
-    constructed from direct estimates of the inverse covariance matrix, known as
-    the precision matrix. Often researchers are interested in making some inference
-    about the pattern of directed relationships which underly a given precision matrix. 
-    From the SEM literature it is known that there is typically a large number of
-    statistically-equivalent path models that can generate a given covariance structure.
-    This package takes as input a precision matrix, and generates the set of
-    statistically-equivalent of linear regression path models which map onto the input
-    precision matrix, denoted the SE-set. Path models generated are restricted to consisting of
-    observed variables, regression weights, and uncorrelated residual terms, and are acyclic.
-    As such, the path models in the SE-set are considered as weighted directed acyclic graphs
-    (DAGs).
+Title: Computing statistically-equivalent path models
+Version: 1.0.1
+Author: c(
+  person("Oisín", "Ryan", email = "o.ryan@uu.nl",role = c("aut", "cre")))
+Maintainer: Oisín Ryan <o.ryan@uu.nl>
+Description: Computes the set of statistically-equivalent 
+             (Gaussian, linear) path models which generate the input precision or correlation matrix. 
+BugReports: https://github.com/ryanoisin/SEset
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
