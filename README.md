@@ -1,8 +1,3 @@
----
-output:
-  html_document: default
----
-
 # SEset
 An `R` package implementing the **SE-set algorithm**, a tool to explore statistically-equivalent path models from correlation matrices and Gaussian Graphical Models (GGMs).
 
