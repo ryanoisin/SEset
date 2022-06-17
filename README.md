@@ -4,8 +4,8 @@
 An `R` package implementing the **SE-set algorithm**, a tool to explore statistically-equivalent path models from correlation matrices and Gaussian Graphical Models (GGMs).
 
 ## Background
-This repository contains an `R` package used by [Ryan, Bringmann and Schuurman (2022) The Challenge of Generating Causal Hypotheses Using Network Models. *Structural Equation Modeling: A Multidisciplinary Journal*, DOI: 10.1080/10705511.2022.2056039](https://www.tandfonline.com/doi/pdf/10.1080/10705511.2022.2056039?needAccess=true) to aid researchers in 
-investigating the relationship between a given GGM estimate (in the form of a precision matrix) and possible underlying linear path models. Linear path models can also be interpreted as "weighted DAGs". Full details on the package can be found in **Appendix B** of the manuscript, and code to reproduce the empirical illustration in that paper can be found in [this repository](https://github.com/ryanoisin/CausalHypotheses).
+This repository contains an `R` package used by [Ryan, Bringmann and Schuurman (2022) The Challenge of Generating Causal Hypotheses Using Network Models. *Structural Equation Modeling: A Multidisciplinary Journal*, DOI: 10.1080/10705511.2022.2056039](https://www.tandfonline.com/doi/pdf/10.1080/10705511.2022.2056039?needAccess=true). The pacakge allows researchers to 
+investigate the relationship between a given GGM and possible underlying linear path models. Linear path models can also be interpreted as "weighted DAGs". Full details on the package can be found in **Appendix B** of the manuscript, and code to reproduce the empirical illustration in that paper can be found in [this repository](https://github.com/ryanoisin/CausalHypotheses).
 
 Please note that we recommend the use of this tool only for GGMs with **13 or less nodes** as the size of the outputted object, and the run-time, grows factorialy ($p!$) with each node in the network.
 
