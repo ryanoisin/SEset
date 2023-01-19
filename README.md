@@ -1,5 +1,8 @@
 # SEset
 [![](https://cranlogs.r-pkg.org/badges/grand-total/SEset)](https://cran.r-project.org/package=SEset)
+[![CRAN version](http://www.r-pkg.org/badges/version/SEset)](http://www.r-pkg.org/pkg/SEset)
+[![Project Status: Inactive –  The project has reached a stable, usable state but is no longer being actively developed.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
+
 
 An `R` package implementing the **SE-set algorithm**, a tool to explore statistically-equivalent path models from correlation matrices and Gaussian Graphical Models (GGMs).
 
